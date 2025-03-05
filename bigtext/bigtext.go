@@ -21,7 +21,7 @@ func (g GiantText) Display(array cellarray.CellArray, style tcell.Style, p image
 		for dx := 0; dx < g.Size.X; dx++ {
 			char := g.content[dy*g.Size.X+dx]
 			if char == 0x0 {
-				char = ' '
+				continue
 			}
 			array.Set(image.Pt(p.X+dx, p.Y+dy), char, style)
 		}

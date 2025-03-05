@@ -77,8 +77,8 @@ func main() {
 	slide1 := cellarray.New(size)
 	slide2 := cellarray.New(size)
 
-	slideBackground := tcell.StyleDefault.Background(tcell.ColorDarkSlateGray)
-	textBackground := tcell.StyleDefault.Background(tcell.ColorWhite).Foreground(tcell.ColorBlack)
+	slideBackground := tcell.StyleDefault.Background(tcell.ColorBlack)
+	textBackground := tcell.StyleDefault.Background(tcell.ColorGray).Foreground(tcell.ColorBlack)
 	setBackground(slide1, slideBackground)
 	setBackground(slide2, slideBackground)
 
@@ -97,9 +97,11 @@ func main() {
 
 	bounds := image.Rect(0, 0, 64, 32)
 
+	rectangle(slide1, bounds, tcell.StyleDefault.Background(tcell.ColorGreen))
+
 	smallRoseImage := resizeImage(roseImage, bounds)
 
-	drawImage(slide1, smallRoseImage, image.Pt(size.Y-bounds.Max.Y-padding, size.X/2-bounds.Max.X/2), slideBackground)
+	drawImage(slide1, smallRoseImage, image.Pt(size.X/2-bounds.Max.X/2, size.Y-bounds.Max.Y-padding), slideBackground)
 
 	pres := presentation{slides: []cellarray.CellArray{slide1, slide2}, cursor: 0}
 	projectSlide(s, pres.slides[pres.cursor])
