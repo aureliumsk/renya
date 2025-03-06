@@ -11,15 +11,15 @@ import (
 	// "math"
 )
 
-type GiantText struct {
+type BigText struct {
 	Size    image.Point
 	content []rune
 }
 
-func (g GiantText) Display(array cellarray.CellArray, style tcell.Style, p image.Point) {
-	for dy := 0; dy < g.Size.Y; dy++ {
-		for dx := 0; dx < g.Size.X; dx++ {
-			char := g.content[dy*g.Size.X+dx]
+func (b BigText) Display(array cellarray.CellArray, style tcell.Style, p image.Point) {
+	for dy := 0; dy < b.Size.Y; dy++ {
+		for dx := 0; dx < b.Size.X; dx++ {
+			char := b.content[dy*b.Size.X+dx]
 			if char == 0x0 {
 				continue
 			}
@@ -28,7 +28,7 @@ func (g GiantText) Display(array cellarray.CellArray, style tcell.Style, p image
 	}
 }
 
-func Render(s string, face font.Face) GiantText {
+func Render(s string, face font.Face) BigText {
 	textBounds, _ := font.BoundString(face, s)
 	startY := -textBounds.Min.Y
 	maxY := startY.Floor() + textBounds.Max.Y.Floor()
@@ -63,5 +63,5 @@ func Render(s string, face font.Face) GiantText {
 			text[y*maxX+x] = '8'
 		}
 	}
-	return GiantText{Size: image.Pt(maxX, maxY), content: text}
+	return BigText{Size: image.Pt(maxX, maxY), content: text}
 }

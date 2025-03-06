@@ -31,4 +31,14 @@ func (c CellArray) Get(p image.Point) Cell {
 	return c.content[p.Y*c.Size.X+p.X]
 }
 
+func (c CellArray) Fill(r rune, s tcell.Style) {
+	for y := 0; y < c.Size.Y; y++ {
+		for x := 0; x < c.Size.X; x++ {
+			c := &c.content[y*c.Size.X+x]
+			c.Rune = r
+			c.Style = s
+		}
+	}
+}
+
 // TODO: Написать метод для изменения размера (ширины и высоты) массива
