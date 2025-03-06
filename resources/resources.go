@@ -24,6 +24,9 @@ func parseFontOrPanic(b []byte) *truetype.Font {
 	return font
 }
 
+//go:embed resources/song.mp3
+var Song []byte
+
 //go:embed resources/rose-flower.png
 var rawRoseFlowerImage []byte
 

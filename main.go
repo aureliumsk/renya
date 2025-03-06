@@ -5,8 +5,14 @@ import (
 	"github.com/gdamore/tcell/v2"
 	"image"
 	"renya/cellarray"
+	"github.com/gopxl/beep"
+	"github.com/gopxl/beep/mp3"
+	"github.com/gopxl/beep/speaker"
 	// "time"
+	"renya/resources"
 	"renya/slides"
+	"time"
+	"bytes"
 )
 
 const padding = 10
@@ -46,6 +52,16 @@ func projectSlide(s tcell.Screen, c cellarray.CellArray) {
 func main() {
 	createLogger()
 	defer closeLogger()
+
+	streamer, format, err := mp3.Decode(bytes.NewReader(resources.Song))
+	
+	if err != nil {
+		panic(err)
+	}
+
+	speaker.Init(format.SampleRate, format.SampleRate.N(time.Second/10))
+	speaker.Play(beep.Loop(streamer, -1))
+
 	s, err := tcell.NewScreen()
 	if err != nil {
 		panic(err)
